@@ -1,9 +1,6 @@
 # Building the image using my Oracle JDK 7
 FROM gelog/java:oraclejdk7
 
-# Naming me as the maintainer
-MAINTAINER Sebastien Bonami
-
 # Installing HADOOP 2.3.0
 ADD http://archive.apache.org/dist/hadoop/core/hadoop-2.3.0/hadoop-2.3.0.tar.gz /
 RUN sudo tar -zxf /hadoop-2.3.0.tar.gz
@@ -30,7 +27,7 @@ RUN mkdir -p /hdfs-volume/datanode
 
 # Copying HADOOP configuration files
 ### TMP FOR TESTING PURPOSE
-#ADD config/core-site.xml $HADOOP_INSTALL/etc/hadoop/core-site.xml
-#ADD config/yarn-site.xml $HADOOP_INSTALL/etc/hadoop/yarn-site.xml
-#ADD config/mapred-site.xml $HADOOP_INSTALL/etc/hadoop/mapred-site.xml
-#ADD config/hdfs-site.xml $HADOOP_INSTALL/etc/hadoop/hdfs-site.xml
+ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/master/config/core-site.xml $HADOOP_INSTALL/etc/hadoop/core-site.xml
+ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/master/config/yarn-site.xml $HADOOP_INSTALL/etc/hadoop/yarn-site.xml
+ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/master/config/mapred-site.xml $HADOOP_INSTALL/etc/hadoop/mapred-site.xml
+ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/master/config/hdfs-site.xml $HADOOP_INSTALL/etc/hadoop/hdfs-site.xml
