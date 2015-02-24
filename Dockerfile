@@ -1,12 +1,12 @@
 # Building the image using my Oracle JDK 7
 FROM gelog/java:oraclejdk7
 
-# Installing HADOOP 2.4.0
-ADD http://archive.apache.org/dist/hadoop/core/hadoop-2.4.0/hadoop-2.4.0.tar.gz /
-RUN sudo tar -zxf /hadoop-2.4.0.tar.gz
-RUN sudo rm /hadoop-2.4.0.tar.gz
-RUN sudo mv /hadoop-2.4.0 /usr/local
-RUN sudo ln -s /usr/local/hadoop-2.4.0 /usr/local/hadoop
+# Installing HADOOP 2.4.1
+ADD http://archive.apache.org/dist/hadoop/core/hadoop-2.4.1/hadoop-2.4.1.tar.gz /
+RUN sudo tar -zxf /hadoop-2.4.1.tar.gz
+RUN sudo rm /hadoop-2.4.1.tar.gz
+RUN sudo mv /hadoop-2.4.1 /usr/local
+RUN sudo ln -s /usr/local/hadoop-2.4.1 /usr/local/hadoop
 
 # Setting HADOOP environment variables
 ENV HADOOP_INSTALL /usr/local/hadoop
