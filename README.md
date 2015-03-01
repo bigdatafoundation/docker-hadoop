@@ -28,7 +28,7 @@ Docker images are the basis of containers. Images are read-only, while container
 * [Install Docker](https://docs.docker.com/installation/)
 
 # Base Docker image
-* [gelog/java:oraclejdk7](https://registry.hub.docker.com/u/gelog/java/)
+* [gelog/java:openjdk7](https://registry.hub.docker.com/u/gelog/java/)
 
 # How to use this image?
 ### Starting the namenode
