@@ -26,8 +26,7 @@ RUN mkdir -p /hdfs-volume/namenode
 RUN mkdir -p /hdfs-volume/datanode
 
 # Copying HADOOP configuration files
-### TMP FOR TESTING PURPOSE
-ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/master/config/core-site.xml $HADOOP_INSTALL/etc/hadoop/core-site.xml
-ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/master/config/yarn-site.xml $HADOOP_INSTALL/etc/hadoop/yarn-site.xml
-ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/master/config/mapred-site.xml $HADOOP_INSTALL/etc/hadoop/mapred-site.xml
-ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/master/config/hdfs-site.xml $HADOOP_INSTALL/etc/hadoop/hdfs-site.xml
+ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/config-1.0.0/config/core-site.xml $HADOOP_INSTALL/etc/hadoop/core-site.xml
+ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/config-1.0.0/config/yarn-site.xml $HADOOP_INSTALL/etc/hadoop/yarn-site.xml
+ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/config-1.0.0/config/mapred-site.xml $HADOOP_INSTALL/etc/hadoop/mapred-site.xml
+ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/config-1.0.0/config/hdfs-site.xml $HADOOP_INSTALL/etc/hadoop/hdfs-site.xml
