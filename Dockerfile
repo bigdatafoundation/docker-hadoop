@@ -1,12 +1,13 @@
 # Building the image using my Oracle JDK 7
-FROM gelog/java:oraclejdk7
+FROM gelog/java:openjdk7
 
-# Installing HADOOP 2.6.0
-ADD http://archive.apache.org/dist/hadoop/core/hadoop-2.6.0/hadoop-2.6.0.tar.gz /
-RUN sudo tar -zxf /hadoop-2.6.0.tar.gz
-RUN sudo rm /hadoop-2.6.0.tar.gz
-RUN sudo mv /hadoop-2.6.0 /usr/local
-RUN sudo ln -s /usr/local/hadoop-2.6.0 /usr/local/hadoop
+# Installing HADOOP
+ENV HADOOP_VERSION 2.3.0
+ADD http://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz /
+RUN sudo tar -zxf /hadoop-$HADOOP_VERSION.tar.gz
+RUN sudo rm /hadoop-$HADOOP_VERSION.tar.gz
+RUN sudo mv /hadoop-$HADOOP_VERSION /usr/local
+RUN sudo ln -s /usr/local/hadoop-$HADOOP_VERSION /usr/local/hadoop
 
 # Setting HADOOP environment variables
 ENV HADOOP_INSTALL /usr/local/hadoop
