@@ -2,7 +2,7 @@
 FROM gelog/java:openjdk7
 
 # Installing HADOOP
-ENV HADOOP_VERSION 2.3.0
+ENV HADOOP_VERSION 2.4.0
 ADD http://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz /
 RUN sudo tar -zxf /hadoop-$HADOOP_VERSION.tar.gz
 RUN sudo rm /hadoop-$HADOOP_VERSION.tar.gz
