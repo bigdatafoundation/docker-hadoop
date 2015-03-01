@@ -28,6 +28,7 @@ Docker images are the basis of containers. Images are read-only, while container
 * [Install Docker](https://docs.docker.com/installation/)
 
 # Base Docker image
-* [gelog/spark:1.1.0-bin-hadoop2.3](https://registry.hub.docker.com/u/gelog/spark/)
+* [gelog/java:oraclejdk7](https://registry.hub.docker.com/u/gelog/java/)
 
 # How to use this image?
+    docker run --rm -ti gelog/hadoop:2.3.0
