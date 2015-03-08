@@ -20,7 +20,7 @@ ENV HADOOP_COMMON_LIB_NATIVE_DIR $HADOOP_INSTALL/lib/native
 ENV YARN_HOME $HADOOP_INSTALL
 
 # Setting JAVA_HOME environment variable for HADOOP
-RUN sed -i 's/JAVA_HOME=${JAVA_HOME}/JAVA_HOME=\/usr\/lib\/jvm\/jdk/g' /usr/local/hadoop/etc/hadoop/hadoop-env.sh
+#RUN sed -i 's/JAVA_HOME=${JAVA_HOME}/JAVA_HOME=\/usr\/lib\/jvm\/jdk/g' /usr/local/hadoop/etc/hadoop/hadoop-env.sh
 
 # Creating HDFS directories
 RUN mkdir -p /hdfs-volume/namenode
