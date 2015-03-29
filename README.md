@@ -34,13 +34,10 @@ Docker images are the basis of containers. Images are read-only, while container
 ### Starting the namenode
     docker run -ti --name namenode -h namenode -v /data:/data -p 50070:50070 gelog/hadoop:2.3.0
     hdfs namenode -format
-    mkdir -p /usr/local/hadoop-2.3.0/logs
     /usr/local/hadoop/sbin/hadoop-daemon.sh start namenode
 ### Starting a secondary namenode
     docker run -ti --name secnamenode -h secnamenode -v /data:/data -p 50090:50090 gelog/hadoop:2.3.0
-    mkdir -p /usr/local/hadoop-2.3.0/logs
     /usr/local/hadoop/sbin/hadoop-daemon.sh start secondarynamenode
 ### Starting a datanode
     docker run -ti --name datanode -h datanode -v /data:/data -p 50080:50080 gelog/hadoop:2.3.0
-    mkdir -p /usr/local/hadoop-2.3.0/logs
     /usr/local/hadoop/sbin/hadoop-daemon.sh start datanode
