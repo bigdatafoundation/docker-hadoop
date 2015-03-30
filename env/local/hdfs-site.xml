@@ -22,12 +22,16 @@
 		<value>2</value>
 	</property>
 	<property>
-		<name>dfs.namenode.name.dir</name>
-		<value>file:/hdfs-volume/namenode</value>
+		<name>dfs.datanode.data.dir</name>
+		<value>file:///data/dfs/data</value>
 	</property>
 	<property>
-		<name>dfs.datanode.data.dir</name>
-		<value>file:/hdfs-volume/datanode</value>
+		<name>dfs.namenode.name.dir</name>
+		<value>file:///data/dfs/name</value>
+	</property>
+	<property>
+		<name>dfs.namenode.checkpoint.dir</name>
+		<value>file:///data/dfs/namesecondary </value>
 	</property>
 	<property>
 		<name>dfs.namenode.datanode.registration.ip-hostname-check</name>
