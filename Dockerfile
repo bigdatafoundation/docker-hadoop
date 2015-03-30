@@ -19,9 +19,15 @@ RUN rm /hadoop-$HADOOP_VERSION.tar.gz
 RUN mv /hadoop-$HADOOP_VERSION /usr/local/hadoop
 RUN mkdir -p /usr/local/hadoop/logs
 
-# Copying HADOOP configuration files
+# Creating symlink for HADOOP configuration files
 VOLUME /data
 RUN ln -fs /data/conf/core-site.xml /usr/local/hadoop/etc/hadoop/core-site.xml
 RUN ln -fs /data/conf/yarn-site.xml /usr/local/hadoop/etc/hadoop/yarn-site.xml
 RUN ln -fs /data/conf/mapred-site.xml /usr/local/hadoop/etc/hadoop/mapred-site.xml
 RUN ln -fs /data/conf/hdfs-site.xml /usr/local/hadoop/etc/hadoop/hdfs-site.xml
+
+# Copying default HADOOP configuration files
+ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/$HADOOP_VERSION/env/local/core-site.xml /data/conf/core-site.xml
+ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/$HADOOP_VERSION/env/local/yarn-site.xml /data/conf/yarn-site.xml
+ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/$HADOOP_VERSION/env/local/mapred-site.xml /data/conf/mapred-site.xml
+ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/$HADOOP_VERSION/env/local/hdfs-site.xml /data/conf/hdfs-site.xml
