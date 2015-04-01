@@ -19,6 +19,6 @@
 <configuration>
 	<property>
 		<name>fs.default.name</name>
-		<value>hdfs://192.168.0.19:9000</value>
+		<value>hdfs://$HADOOP_NAMENODE:9000</value>
 	</property>
 </configuration>
