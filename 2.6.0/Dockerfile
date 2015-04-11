@@ -24,8 +24,9 @@ RUN \
 
 # Installing HADOOP
 RUN wget http://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
-    tar -zxf /hadoop-$HADOOP_VERSION.tar.gz -C /usr/local/ && \
-    mv /usr/local/hadoop-$HADOOP_VERSION /usr/local/hadoop && \
+    tar -zxf /hadoop-$HADOOP_VERSION.tar.gz && \
+    rm /hadoop-$HADOOP_VERSION.tar.gz && \
+    mv hadoop-$HADOOP_VERSION /usr/local/hadoop && \
     mkdir -p /usr/local/hadoop/logs
 
 # Creating symlink for HADOOP configuration files
