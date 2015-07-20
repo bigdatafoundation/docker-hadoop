@@ -14,7 +14,7 @@ ENV HADOOP_COMMON_HOME $HADOOP_INSTALL
 ENV HADOOP_HDFS_HOME $HADOOP_INSTALL
 ENV HADOOP_COMMON_LIB_NATIVE_DIR $HADOOP_INSTALL/lib/native
 ENV YARN_HOME $HADOOP_INSTALL
-ENV HADOOP_CONF_DIR /data/conf
+ENV HADOOP_CONF_DIR $HADOOP_INSTALL/etc/hadoop
 
 # Installing wget
 RUN \
@@ -31,6 +31,7 @@ RUN wget http://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoo
 
 # Creating symlink for HADOOP configuration files
 VOLUME /data
+
 # Copying default HADOOP configuration files
 ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/$HADOOP_VERSION/$HADOOP_VERSION/core-site.xml $HADOOP_CONF_DIR/core-site.xml
 ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/$HADOOP_VERSION/$HADOOP_VERSION/yarn-site.xml $HADOOP_CONF_DIR/yarn-site.xml
