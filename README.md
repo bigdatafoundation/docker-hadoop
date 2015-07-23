@@ -31,11 +31,11 @@ Docker images are the basis of containers. Images are read-only, while container
 * [gelog/java:openjdk7](https://registry.hub.docker.com/u/gelog/java/)
 
 # How to use this image?
-### Formating the namenode
-    docker run -d --name hdfs-namenode -h hdfs-namenode gelog/hadoop:2.3.0 hdfs namenode -format
+### Formating the namenode (only do once)
+	docker run -d -h hdfs-namenode -v /hostdirectory/mount/hdfs-namenode:/data gelog/hadoop:2.6.0 hdfs namenode -format
 ### Starting the namenode
-    docker run -d --name hdfs-namenode -h hdfs-namenode -p 9000:9000 -p 50070:50070 gelog/hadoop:2.3.0 hdfs namenode
+	docker run -d --name hdfs-namenode -h hdfs-namenode -p 9000:9000 -p 50070:50070 -v /hostdirectory/mount/hdfs-namenode:/data gelog/hadoop:2.6.0 hdfs namenode
 ### Starting a secondary namenode
-    docker run -d --name hdfs-secondarynamenode -h hdfs-secondarynamenode -p 50090:50090 --link=hdfs-namenode:hdfs-namenode gelog/hadoop:2.3.0 hdfs secondarynamenode
+	docker run -d --name hdfs-secondarynamenode -h hdfs-secondarynamenode -p 50090:50090 -v /hostdirectory/mount/hdfs-secondarynamenode:/data --link=hdfs-namenode:hdfs-namenode gelog/hadoop:2.6.0 hdfs secondarynamenode
 ### Starting a datanode
-    docker run -d --name hdfs-datanode1 -h hdfs-datanode1 -p 50081:50081 --link=hdfs-namenode:hdfs-namenode --link=hdfs-secondarynamenode:hdfs-secondarynamenode gelog/hadoop:2.3.0 hdfs datanode
+	docker run -d --name hdfs-datanode1 -h hdfs-datanode1 -p 50075:50075 -v /hostdirectory/mount/hdfs-datanode:/data --link=hdfs-namenode:hdfs-namenode --link=hdfs-secondarynamenode:hdfs-secondarynamenode gelog/hadoop:2.6.0 hdfs datanode
