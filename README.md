@@ -31,7 +31,7 @@ Docker images are the basis of containers. Images are read-only, while container
 * [gelog/java:openjdk7](https://registry.hub.docker.com/u/gelog/java/)
 
 # How to use this image?
-### Formating the namenode (only do once)
+### Formating the namenode (only do it once)
 	docker run -d -h hdfs-namenode -v /hostdirectory/docker-volumes/hdfs-namenode:/data gelog/hadoop:2.6.0 hdfs namenode -format
 ### Starting the namenode
 	docker run -d --name hdfs-namenode -h hdfs-namenode -p 9000:9000 -p 50070:50070 -v /hostdirectory/docker-volumes/hdfs-namenode:/data gelog/hadoop:2.6.0 hdfs namenode
@@ -39,3 +39,7 @@ Docker images are the basis of containers. Images are read-only, while container
 	docker run -d --name hdfs-secondarynamenode -h hdfs-secondarynamenode -p 50090:50090 -v /hostdirectory/docker-volumes/hdfs-secondarynamenode:/data --link=hdfs-namenode:hdfs-namenode gelog/hadoop:2.6.0 hdfs secondarynamenode
 ### Starting a datanode
 	docker run -d --name hdfs-datanode1 -h hdfs-datanode1 -p 50075:50075 -v /hostdirectory/docker-volumes/hdfs-datanode:/data --link=hdfs-namenode:hdfs-namenode --link=hdfs-secondarynamenode:hdfs-secondarynamenode gelog/hadoop:2.6.0 hdfs datanode
+### Accessing the web interfaces
+	http://hostIP:50070 (namenode)
+	http://hostIP:50090 (secondary namenode)
+	http://hostIP:50075 (datanode)
