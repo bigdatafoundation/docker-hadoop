@@ -38,4 +38,29 @@ ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/$HADOOP_VERSION
 ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/$HADOOP_VERSION/$HADOOP_VERSION/mapred-site.xml $HADOOP_CONF_DIR/mapred-site.xml
 ADD https://raw.githubusercontent.com/GELOG/docker-ubuntu-hadoop/$HADOOP_VERSION/$HADOOP_VERSION/hdfs-site.xml $HADOOP_CONF_DIR/hdfs-site.xml
 
+
+####################
+# PORTS
+####################
+#
+# http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_HDP_Reference_Guide/content/reference_chap2.html
+# http://www.cloudera.com/content/cloudera/en/documentation/core/latest/topics/cdh_ig_ports_cdh5.html
+# http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/core-default.xml
+# http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml
+
+# HDFS: NameNode (NN):
+#	 8020 = fs.defaultFS			(IPC / File system metadata operations)
+#						(9000 is also frequently used alternatively)
+#	 8022 = dfs.namenode.servicerpc-address	(optional port used by HDFS daemons to avoid sharing RPC port)
+#       50070 = dfs.namenode.http-address	(HTTP  / NN Web UI)
+#	50470 = dfs.namenode.https-address	(HTTPS / Secure UI)
+# HDFS: DataNode (DN):
+#	50010 = dfs.datanode.address		(Data transfer)
+#	50020 = dfs.datanode.ipc.address	(IPC / metadata operations)
+#	50075 = dfs.datanode.http.address	(HTTP  / DN Web UI)
+#	50475 = dfs.datanode.https.address	(HTTPS / Secure UI)
+# HDFS: Secondary NameNode (SNN)
+#	50090 = dfs.secondary.http.address	(HTTP / Checkpoint for NameNode metadata)
+EXPOSE 9000 50070 50010 50020 50075 50090
+
 CMD ["hdfs"]
