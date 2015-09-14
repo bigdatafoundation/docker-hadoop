@@ -58,7 +58,7 @@ This command starts a container for the HDFS NameNode in the background, and sta
 If everything looks good in the logs (no errors), hit `CTRL + C` to detach the console from the logs.
 
 
-### Starting a DataNode in a separate container
+### Starting a DataNode
 This command starts a separate container for the HDFS DataNode in the background, link it with the NameNode container, and starts tailing its logs.
 
 	docker run -d --name hdfs-datanode1 \
@@ -71,7 +71,7 @@ This command starts a separate container for the HDFS DataNode in the background
 If everything looks good in the logs (no errors), hit `CTRL + C` to detach the console from the logs.
 
 
-### Starting a secondary namenode
+### Starting a Secondary NameNode
 This command starts a separate container for the HDFS Secondary NameNode in the background, link it with the NameNode container, and starts tailing its logs.
 
 	docker run -d --name hdfs-secondarynamenode \
