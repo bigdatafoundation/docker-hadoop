@@ -1,4 +1,5 @@
 # Docker image for Hadoop
+![hadoop logo](https://hadoop.apache.org/images/hadoop-logo.jpg)
 
 [ ![issues](https://img.shields.io/github/issues/gelog/docker-ubuntu-hadoop.svg) ](https://github.com/gelog/docker-ubuntu-hadoop)
 
