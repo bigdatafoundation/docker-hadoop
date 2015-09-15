@@ -50,7 +50,7 @@ This image is configured (in `hdfs-site.xml`) to store HDFS data at the followin
 This command starts a container for the HDFS NameNode in the background, and starts tailing its logs.
 
 	docker run -d --name hdfs-namenode \
-		-h hdfs-namenode -p 9000:9000 -p 50070:50070 \
+		-h hdfs-namenode -p 50070:50070 \
 		-v $HOME/data/hadoop/hdfs:/data \
 		gelog/hadoop hdfs namenode && \
 	docker logs -f hdfs-namenode
