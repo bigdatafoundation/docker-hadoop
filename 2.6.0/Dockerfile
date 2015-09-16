@@ -1,42 +1,26 @@
-FROM ubuntu:14.04.1
+FROM ubuntu:14.04
 
 MAINTAINER Francois Langelier
 
-ENV WGET_VERSION       1.15-1ubuntu1.14.04.1
 # Setting HADOOP environment variables
 ENV HADOOP_VERSION 2.6.0
-ENV HADOOP_INSTALL /usr/local/hadoop
-ENV PATH $PATH:$HADOOP_INSTALL/bin
-ENV PATH $PATH:$HADOOP_INSTALL/sbin
-ENV HADOOP_MAPRED_HOME $HADOOP_INSTALL
-ENV HADOOP_COMMON_HOME $HADOOP_INSTALL
-ENV HADOOP_HDFS_HOME $HADOOP_INSTALL
-ENV HADOOP_COMMON_LIB_NATIVE_DIR $HADOOP_INSTALL/lib/native
-ENV YARN_HOME $HADOOP_INSTALL
-ENV HADOOP_CONF_DIR $HADOOP_INSTALL/etc/hadoop
-ENV JAVA_VERSION 7u79-2.5.6-0ubuntu1.14.04.1
+ENV HADOOP_HOME /usr/local/hadoop
+ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 ENV JAVA_HOME /usr/lib/jvm/jdk
 
 
-# Installing wget
-RUN \
-    apt-get update && \
-    apt-get install -y wget=$WGET_VERSION && \
-    rm -rf /var/lib/apt/lists/*
-
 # Installing HADOOP
-RUN wget http://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-7-jdk=7u79\* wget && \
+    wget http://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
     tar -zxf /hadoop-$HADOOP_VERSION.tar.gz && \
     rm /hadoop-$HADOOP_VERSION.tar.gz && \
     mv hadoop-$HADOOP_VERSION /usr/local/hadoop && \
-    mkdir -p /usr/local/hadoop/logs
+    mkdir -p /usr/local/hadoop/logs && \
+    apt-get remove -y wget && \
+    rm -rf /var/lib/apt/lists/* && \
+    ln -s /usr/lib/jvm/java-7-openjdk-amd64 /usr/lib/jvm/jdk
 
-# Install Java.
-RUN \
-    apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-7-jdk=$JAVA_VERSION && \
-    ln -s /usr/lib/jvm/java-7-openjdk-amd64 /usr/lib/jvm/jdk && \
-    rm -rf /var/lib/apt/lists/*
 
 # Creating symlink for HADOOP configuration files
 VOLUME /data
