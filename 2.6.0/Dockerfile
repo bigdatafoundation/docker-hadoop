@@ -1,5 +1,4 @@
-# Building the image using my Oracle JDK 7
-FROM gelog/java:openjdk7
+FROM ubuntu:14.04.1
 
 MAINTAINER Francois Langelier
 
@@ -15,6 +14,9 @@ ENV HADOOP_HDFS_HOME $HADOOP_INSTALL
 ENV HADOOP_COMMON_LIB_NATIVE_DIR $HADOOP_INSTALL/lib/native
 ENV YARN_HOME $HADOOP_INSTALL
 ENV HADOOP_CONF_DIR $HADOOP_INSTALL/etc/hadoop
+ENV JAVA_VERSION 7u79-2.5.6-0ubuntu1.14.04.1
+ENV JAVA_HOME /usr/lib/jvm/jdk
+
 
 # Installing wget
 RUN \
@@ -28,6 +30,13 @@ RUN wget http://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoo
     rm /hadoop-$HADOOP_VERSION.tar.gz && \
     mv hadoop-$HADOOP_VERSION /usr/local/hadoop && \
     mkdir -p /usr/local/hadoop/logs
+
+# Install Java.
+RUN \
+    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-7-jdk=$JAVA_VERSION && \
+    ln -s /usr/lib/jvm/java-7-openjdk-amd64 /usr/lib/jvm/jdk && \
+    rm -rf /var/lib/apt/lists/*
 
 # Creating symlink for HADOOP configuration files
 VOLUME /data
