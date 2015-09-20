@@ -40,7 +40,8 @@ This image is configured (in `hdfs-site.xml`) to store HDFS data at the followin
 	mkdir -p ~/data/hadoop/hdfs
 
 
-### Formating the namenode (only do this step once)
+### Formating the namenode (only do this step once) 
+*This step is not necessary with the newest version of the image.*
 
 	docker run --rm -i -h hdfs-namenode \
 		-v $HOME/data/hadoop/hdfs:/data \
@@ -93,5 +94,4 @@ Each component provide its own web UI. Open you browser at one of the URLs below
 | HDFS NameNode           | [http://dockerhost:50070](http://dockerhost:50070) |
 | HDFS DataNode           | [http://dockerhost:50075](http://dockerhost:50075) |
 | HDFS Secondary NameNode | [http://dockerhost:50090](http://dockerhost:50090) |
-
 
