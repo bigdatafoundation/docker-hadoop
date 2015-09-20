@@ -38,14 +38,17 @@ RUN \
     ln -s /usr/lib/jvm/java-7-openjdk-amd64 /usr/lib/jvm/jdk && \
     rm -rf /var/lib/apt/lists/*
 
-# Creating symlink for HADOOP configuration files
-VOLUME /data
 
 # Copying default HADOOP configuration files
 ADD core-site.xml $HADOOP_CONF_DIR/core-site.xml
 ADD yarn-site.xml $HADOOP_CONF_DIR/yarn-site.xml
 ADD mapred-site.xml $HADOOP_CONF_DIR/mapred-site.xml
 ADD hdfs-site.xml $HADOOP_CONF_DIR/hdfs-site.xml
+
+# Creating symlink for HADOOP configuration files
+RUN mkdir /data && \
+hdfs namenode -format
+VOLUME /data
 
 
 ####################
@@ -71,5 +74,7 @@ ADD hdfs-site.xml $HADOOP_CONF_DIR/hdfs-site.xml
 # HDFS: Secondary NameNode (SNN)
 #	50090 = dfs.secondary.http.address	(HTTP / Checkpoint for NameNode metadata)
 EXPOSE 9000 50070 50010 50020 50075 50090
+
+
 
 CMD ["hdfs"]
