@@ -6,7 +6,7 @@ MAINTAINER Francois Langelier
 ENV HADOOP_VERSION 2.6.0
 ENV HADOOP_HOME /usr/local/hadoop
 ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
-ENV JAVA_HOME /usr/lib/jvm/jdk
+ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 
 
 # Installing HADOOP
@@ -18,8 +18,7 @@ RUN apt-get update && \
     mv hadoop-$HADOOP_VERSION /usr/local/hadoop && \
     mkdir -p /usr/local/hadoop/logs && \
     apt-get remove -y wget && \
-    rm -rf /var/lib/apt/lists/* && \
-    ln -s /usr/lib/jvm/java-7-openjdk-amd64 /usr/lib/jvm/jdk
+    rm -rf /var/lib/apt/lists/* 
 
 
 # Creating symlink for HADOOP configuration files
