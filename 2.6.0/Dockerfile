@@ -16,12 +16,14 @@ ENV YARN_HOME $HADOOP_INSTALL
 ENV HADOOP_CONF_DIR $HADOOP_INSTALL/etc/hadoop
 ENV JAVA_VERSION 7u79-2.5.6-0ubuntu1.14.04.1
 ENV JAVA_HOME /usr/lib/jvm/jdk
+ENV HADOOP_OPTS -Djava.library.path=/usr/local/hadoop/lib/native
 
 
 # Installing wget
 RUN \
     apt-get update && \
     apt-get install -y wget=$WGET_VERSION && \
+    apt-get install -y libzip2 libsnappy1 libssl-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # Installing HADOOP
