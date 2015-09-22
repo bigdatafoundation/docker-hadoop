@@ -85,6 +85,64 @@ This command starts a separate container for the HDFS Secondary NameNode in the 
 If everything looks good in the logs (no errors), hit `CTRL + C` to detach the console from the logs.
 
 
+### Starting YARN
+This command starts a container for the YARN system in background. It links with the NameNode, the Datanode.
+The start-yarn.sh script starts a YARN Node manager and a YARN Resource Manager. 
+
+```
+docker run -d --name yarn \
+		-h yarn \
+		-p 8088:8088 \
+     	-p 8042:8042 \
+		--link=hdfs-namenode:hdfs-namenode \
+		--link=hdfs-datanode1:hdfs-datanode1 \
+		-v $HOME/data/hadoop/hdfs:/data \
+		gelog/hadoop start-yarn.sh && \
+docker logs -f yarn
+```
+
+
+
+### Submit a Map Reduce job 
+
+#### Put some data in HDFS
+```
+docker run --rm \
+        --link=hdfs-namenode:hdfs-namenode \
+        --link=hdfs-datanode1:hdfs-datanode1 \
+        gelog/hadoop \
+        hadoop fs -put /usr/local/hadoop/README.txt /README.txt
+```
+#### Start wordcount example
+
+This runs the word count example.
+```
+docker run --rm \
+        --link yarn:yarn \
+        --link=hdfs-namenode:hdfs-namenode \
+        gelog/hadoop \
+        hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar wordcount  /README.txt /README.result
+
+```
+
+If README.result already exists you need to remove it prior running the map reduce job.
+
+```
+docker run --rm --link=hdfs-namenode:hdfs-namenode \
+        --link=hdfs-datanode1:hdfs-datanode1 \
+        gelog/hadoop \
+        hadoop fs -rm -R -f /README.result
+```
+
+
+#### Check the result
+```
+docker run --rm --link=hdfs-namenode:hdfs-namenode \
+        --link=hdfs-datanode1:hdfs-datanode1 \
+        gelog/hadoop \
+        hadoop fs -cat /README.result/\*
+```
+
 ### Accessing the web interfaces
 Each component provide its own web UI. Open you browser at one of the URLs below, where `dockerhost` is the name / IP of the host running the docker daemon. If using Linux, this is the IP of your linux box. If using OSX or Windows (via Boot2docker), you can find out your docker host by typing `boot2docker ip`. On my machine, the NameNode UI is accessible at `http://192.168.59.103:50070/`
 
@@ -93,5 +151,8 @@ Each component provide its own web UI. Open you browser at one of the URLs below
 | HDFS NameNode           | [http://dockerhost:50070](http://dockerhost:50070) |
 | HDFS DataNode           | [http://dockerhost:50075](http://dockerhost:50075) |
 | HDFS Secondary NameNode | [http://dockerhost:50090](http://dockerhost:50090) |
+| YARN Resource Manager   | [http://dockerhost:8088](http://dockerhost:8088) |
+| YARN Node Manager   | [http://dockerhost:8042](http://dockerhost:8042) |
+
 
 
