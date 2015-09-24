@@ -34,26 +34,12 @@ Docker images are the basis of containers. Images are read-only, while container
 
 ## How to use this image?
 
-### Data storage
-This image is configured (in `hdfs-site.xml`) to store HDFS data at the following locations: `file:///data/dfs/data` (for DataNode), `file:///data/dfs/name` (for NameNode), and `file:///data/dfs/namesecondary` (for SecondaryNameNode). To enable data persistence accross HDFS restarts, the data should be stored outside Docker. In the examples below, a directory from the host is mounted into the container. To follow these examples, please create a local directory as follow:
-
-	mkdir -p ~/data/hadoop/hdfs
-
-
-### Formating the namenode (only do this step once) 
-*This step is not necessary with the newest version of the image.*
-
-	docker run --rm -i -h hdfs-namenode \
-		-v $HOME/data/hadoop/hdfs:/data \
-		gelog/hadoop hdfs namenode -format
-
 
 ### Starting the NameNode
 This command starts a container for the HDFS NameNode in the background, and starts tailing its logs.
 
 	docker run -d --name hdfs-namenode \
 		-h hdfs-namenode -p 50070:50070 \
-		-v $HOME/data/hadoop/hdfs:/data \
 		gelog/hadoop hdfs namenode && \
 	docker logs -f hdfs-namenode
 
@@ -66,7 +52,6 @@ This command starts a separate container for the HDFS DataNode in the background
 	docker run -d --name hdfs-datanode1 \
 		-h hdfs-datanode1 -p 50075:50075 \
 		--link=hdfs-namenode:hdfs-namenode \
-		-v $HOME/data/hadoop/hdfs:/data \
 		gelog/hadoop hdfs datanode && \
 	docker logs -f hdfs-datanode1
 
@@ -79,7 +64,6 @@ This command starts a separate container for the HDFS Secondary NameNode in the 
 	docker run -d --name hdfs-secondarynamenode \
 		-h hdfs-secondarynamenode -p 50090:50090 \
 		--link=hdfs-namenode:hdfs-namenode \
-		-v $HOME/data/hadoop/hdfs:/data \
 		gelog/hadoop hdfs secondarynamenode && \
 	docker logs -f hdfs-secondarynamenode
 
