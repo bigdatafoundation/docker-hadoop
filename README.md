@@ -79,3 +79,26 @@ Each component provide its own web UI. Open you browser at one of the URLs below
 | HDFS DataNode           | [http://dockerhost:50075](http://dockerhost:50075) |
 | HDFS Secondary NameNode | [http://dockerhost:50090](http://dockerhost:50090) |
 
+## Use this image using docker-compose
+Note: your terminal need to be in the folder where the docker-compose.yml is located.
+
+You can start this image using docker-compose. It will start a namenode, a secondary nanenode and a datanode. You have the possibility to scale the datanode.
+
+### Starting the image with basic setting
+    docker-compose up -d && \
+        docker-compose logs
+
+If everything looks good in the logs (no errors), hit `CTRL + C` to detach the console from the logs.
+
+### Scaling the datanode
+If you want to increase the number of datanode in your cluster.
+    docker-compose scale datanode=<number of instance>
+
+### Finding the port for web access
+To allow the datanode to scale, we need to let docker decide the port used on the host machine. To find which port it is
+
+    docker-compose port datanode 50075
+
+With this port, you can access the web interfaces of the datanode.
+
+
