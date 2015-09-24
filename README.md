@@ -91,7 +91,8 @@ You can start this image using docker-compose. It will start a namenode, a secon
 If everything looks good in the logs (no errors), hit `CTRL + C` to detach the console from the logs.
 
 ### Scaling the datanode
-If you want to increase the number of datanode in your cluster.
+If you want to increase the number of datanode in your cluster
+
     docker-compose scale datanode=<number of instance>
 
 ### Finding the port for web access
