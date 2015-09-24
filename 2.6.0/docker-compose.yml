@@ -1,12 +1,12 @@
 namenode:
-    image: hadoop
+    image: gelog/hadoop
     ports: 
         - "50070:50070"
     command: hdfs namenode
     hostname: hdfs-namenode
 
 datanode:
-    image: hadoop
+    image: gelog/hadoop
     command: hdfs datanode
     ports:
         - "50075"
@@ -14,7 +14,7 @@ datanode:
         - namenode:hdfs-namenode
 
 secondarynamenode:
-    image: hadoop
+    image: gelog/hadoop
     command: hdfs secondarynamenode
     ports:
         - "50090:50090"
