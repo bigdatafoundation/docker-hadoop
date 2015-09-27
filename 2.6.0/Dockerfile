@@ -38,14 +38,6 @@ RUN \
     ln -s /usr/lib/jvm/java-7-openjdk-amd64 /usr/lib/jvm/jdk && \
     rm -rf /var/lib/apt/lists/*
 
-# download native support
-RUN mkdir -p /tmp/native
-RUN curl -Ls http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64-2.7.0.tar | tar -x -C /tmp/native
-# fix the libhadoop.so 
-RUN rm -rf /usr/local/hadoop/lib/native
-RUN mv /tmp/native /usr/local/hadoop/lib
-
-
 # Creating symlink for HADOOP configuration files
 VOLUME /data
 
