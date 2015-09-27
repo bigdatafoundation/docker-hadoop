@@ -94,11 +94,11 @@ Each component provide its own web UI. Open you browser at one of the URLs below
 | HDFS DataNode           | [http://dockerhost:50075](http://dockerhost:50075) |
 | HDFS Secondary NameNode | [http://dockerhost:50090](http://dockerhost:50090) |
 
-Running MapReduce example
+#Running MapReduce example
 
-#General workflow is: Input—>Map—>Reduce->Output
+##General workflow is: Input—>Map—>Reduce->Output
 
-#  1) Configuration
+###1) Configuration
 
 Ammend the following configuration to mapred-site.xml:
 
@@ -115,44 +115,43 @@ Ammend the following configuration to mapred-site.xml:
 </configuration>
 
 
-#  2) create directory for input file
+###2) create directory for input file
 
 hadoop fs -mkdir /usr
 hadoop fs -mkdir /usr/WordCount
 hadoop fs -mkdir /usr/WordCount/Input
 
-# 3) Input Data
+###3) Input Data
 
-#  3.1) create directory for temp file, that will hold the input file to be prepared
+####3.1) create directory for temp file, that will hold the input file to be prepared
 mkdir ~/hdp-ex/
 cd ~/hdp-ex/
 
-#  3.2) prepare input files
+####3.2) prepare input files
 
-#small file example:
+Small file example:
 touch in.txt
 
-#add data to in.txt, containing words to count
+Add data to in.txt, containing words to count:
 
 In this example i am adding the following words:
 
 hello world hello docker hello hadoop hello mapreduce h
 
-#  3.3)  copy file to HDFS for processing by map reduce
+####3.3)  copy file to HDFS for processing by map reduce
 hadoop fs -copyFromLocal ~/hdp-ex/in.txt hdfs://hdfs-namenode:9000/usr/WordCount/Input
 
 
 
-#  4) run the mapreduce, word count
+###4) run the mapreduce, word count
 
 hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar wordcount /usr/WordCount/Input/in_big.txt /usr/WordCount/Output/
 
-#  5) output: check the output
+###5) output: check the output
 
 hadoop fs -ls /usr/WordCount/Output/
 
-#in the output directory there is 2 files, “part-r-00000” contains the output
-
+In the output directory there is 2 files, “part-r-00000” contains the output
 
 hadoop fs  -cat /usr/WordCount/Output/part-r-00000
 
@@ -163,14 +162,3 @@ hadoop	1
 hello	4
 mapreduce	1
 world	1
-
-Note : if interested testing on bigger input data, try the below:
-
-#Note: a bigger file example
-
-wget -o in-big.txt  http://www.gutenberg.org/cache/epub/100/pg100.txt 
-
-hadoop fs -copyFromLocal ~/hdp-ex/in-big.txt hdfs://hdfs-namenode:9000/usr/WordCount/Input
-
-
-
