@@ -104,7 +104,7 @@ Below are steps to implement the workflow.
 
 Ammend the following configuration to mapred-site.xml:
 
-<configuration>
+'<configuration>
 <!--<property>
  <name>mapreduce.framework.name</name>
  <value>yarn</value>
@@ -114,7 +114,7 @@ Ammend the following configuration to mapred-site.xml:
          <value>hdfs-namenode:9001</value>
 </property>
 
-</configuration>
+</configuration>'
 
 ###2) Input Data
 
