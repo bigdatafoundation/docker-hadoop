@@ -110,19 +110,20 @@ Remove the property mapreduce.framework.name
 
 ###2) Input Data
 
-###2.1) create directory for input file
+###2.1) create directory for the input file in HDFS
 
 hadoop fs -mkdir /usr  
 hadoop fs -mkdir /usr/WordCount  
 hadoop fs -mkdir /usr/WordCount/Input  
 
-###2.2) Prepare teh input file
+###2.2) Prepare the input file
+
 mkdir ~/hdp-ex/  
 cd ~/hdp-ex/  
  
 touch in.txt  
 
-In this example i am adding the following words:  
+In this example we are using the following words:  
 
 hello world hello docker hello hadoop hello mapreduce h  
 
@@ -146,10 +147,10 @@ Read the output file:
 
 hadoop fs  -cat /usr/WordCount/Output/part-r-00000  
 
-------------
-docker	1
-h	1
-hadoop	1
-hello	4
-mapreduce	1
-world	1
+------------  
+docker	1  
+h	1  
+hadoop	1  
+hello	4  
+mapreduce	1  
+world	1  
