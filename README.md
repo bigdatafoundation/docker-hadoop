@@ -135,7 +135,7 @@ hadoop fs -copyFromLocal ~/hdp-ex/in.txt hdfs://hdfs-namenode:9000/usr/WordCount
 
 ###3) run the mapreduce, word count
 
-hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar wordcount /usr/WordCount/Input/in_big.txt /usr/WordCount/Output/
+hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar wordcount /usr/WordCount/Input/in.txt /usr/WordCount/Output/
 
 ###4) output: check the output
 
