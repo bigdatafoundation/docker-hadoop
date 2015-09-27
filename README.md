@@ -96,7 +96,9 @@ Each component provide its own web UI. Open you browser at one of the URLs below
 
 #Running MapReduce example
 
-##General workflow is: Input—>Map—>Reduce->Output
+The General workflow for MapRecuce is:'Input—>Map—>Reduce->Output'.
+
+Below are steps to implement the workflow.
 
 ###1) Configuration
 
@@ -114,20 +116,19 @@ Ammend the following configuration to mapred-site.xml:
 
 </configuration>
 
+###2) Input Data
 
-###2) create directory for input file
+####2.1) create directory for input file
 
 hadoop fs -mkdir /usr
 hadoop fs -mkdir /usr/WordCount
 hadoop fs -mkdir /usr/WordCount/Input
 
-###3) Input Data
-
-####3.1) create directory for temp file, that will hold the input file to be prepared
+####2.2) create directory for temp file, that will hold the input file to be prepared
 mkdir ~/hdp-ex/
 cd ~/hdp-ex/
 
-####3.2) prepare input files
+####2.3) prepare input files
 
 Small file example:
 touch in.txt
@@ -138,16 +139,16 @@ In this example i am adding the following words:
 
 hello world hello docker hello hadoop hello mapreduce h
 
-####3.3)  copy file to HDFS for processing by map reduce
+####2.4)  copy file to HDFS for processing by map reduce
 hadoop fs -copyFromLocal ~/hdp-ex/in.txt hdfs://hdfs-namenode:9000/usr/WordCount/Input
 
 
 
-###4) run the mapreduce, word count
+###3) run the mapreduce, word count
 
 hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar wordcount /usr/WordCount/Input/in_big.txt /usr/WordCount/Output/
 
-###5) output: check the output
+###4) output: check the output
 
 hadoop fs -ls /usr/WordCount/Output/
 
