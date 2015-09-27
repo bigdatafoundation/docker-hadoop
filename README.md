@@ -116,20 +116,17 @@ hadoop fs -mkdir /usr
 hadoop fs -mkdir /usr/WordCount  
 hadoop fs -mkdir /usr/WordCount/Input  
 
-###2.2) create directory for temp file, that will hold the input file to be prepared
+###2.2) Prepare teh input file
 mkdir ~/hdp-ex/  
 cd ~/hdp-ex/  
-
-###2.3) prepare input files
-
-Small file example:  
+ 
 touch in.txt  
 
 In this example i am adding the following words:  
 
 hello world hello docker hello hadoop hello mapreduce h  
 
-###2.4)  copy file to HDFS for processing by map reduce
+###2.3)  copy the input file to HDFS for processing by map reduce
 
 hadoop fs -copyFromLocal ~/hdp-ex/in.txt hdfs://hdfs-namenode:9000/usr/WordCount/Input
 
@@ -141,7 +138,11 @@ hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.
 
 hadoop fs -ls /usr/WordCount/Output/  
 
-In the output directory there is 2 files, “part-r-00000” contains the output.  
+Found 2 items  
+-rw-r--r--   2 root supergroup          0 2015-09-27 21:00 /usr/WordCount/Output/_SUCCESS  
+-rw-r--r--   2 root supergroup         50 2015-09-27 21:00 /usr/WordCount/Output/part-r-00000    
+
+Read the output file:
 
 hadoop fs  -cat /usr/WordCount/Output/part-r-00000  
 
