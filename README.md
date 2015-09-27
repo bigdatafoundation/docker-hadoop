@@ -94,7 +94,7 @@ Each component provide its own web UI. Open you browser at one of the URLs below
 | HDFS DataNode           | [http://dockerhost:50075](http://dockerhost:50075) |
 | HDFS Secondary NameNode | [http://dockerhost:50090](http://dockerhost:50090) |
 
-unning MapReduce example
+Running MapReduce example
 
 #General workflow is: Input—>Map—>Reduce->Output
 
