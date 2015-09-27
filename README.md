@@ -102,39 +102,36 @@ Below are steps to implement the workflow.
 
 ###1) Configuration
 
-Ammend the following configuration to mapred-site.xml:
+Ammend the following configuration to mapred-site.xml: 
 
-Set the property mapred.job.tracker to hdfs-namenode:9001.
-Remove the property mapreduce.framework.name
+Set the property mapred.job.tracker to hdfs-namenode:9001.  
+Remove the property mapreduce.framework.name  
 
 
 ###2) Input Data
 
 ###2.1) create directory for input file
 
-hadoop fs -mkdir /usr
-hadoop fs -mkdir /usr/WordCount
-hadoop fs -mkdir /usr/WordCount/Input
+hadoop fs -mkdir /usr  
+hadoop fs -mkdir /usr/WordCount  
+hadoop fs -mkdir /usr/WordCount/Input  
 
 ###2.2) create directory for temp file, that will hold the input file to be prepared
-mkdir ~/hdp-ex/
-cd ~/hdp-ex/
+mkdir ~/hdp-ex/  
+cd ~/hdp-ex/  
 
 ###2.3) prepare input files
 
-Small file example:
-touch in.txt
+Small file example:  
+touch in.txt  
 
-Add data to in.txt, containing words to count:
+In this example i am adding the following words:  
 
-In this example i am adding the following words:
-
-hello world hello docker hello hadoop hello mapreduce h
+hello world hello docker hello hadoop hello mapreduce h  
 
 ###2.4)  copy file to HDFS for processing by map reduce
+
 hadoop fs -copyFromLocal ~/hdp-ex/in.txt hdfs://hdfs-namenode:9000/usr/WordCount/Input
-
-
 
 ###3) run the mapreduce, word count
 
@@ -142,11 +139,11 @@ hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.
 
 ###4) output: check the output
 
-hadoop fs -ls /usr/WordCount/Output/
+hadoop fs -ls /usr/WordCount/Output/  
 
-In the output directory there is 2 files, “part-r-00000” contains the output
+In the output directory there is 2 files, “part-r-00000” contains the output.  
 
-hadoop fs  -cat /usr/WordCount/Output/part-r-00000
+hadoop fs  -cat /usr/WordCount/Output/part-r-00000  
 
 ------------
 docker	1
