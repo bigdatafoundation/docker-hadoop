@@ -94,7 +94,7 @@ Each component provide its own web UI. Open you browser at one of the URLs below
 | HDFS DataNode           | [http://dockerhost:50075](http://dockerhost:50075) |
 | HDFS Secondary NameNode | [http://dockerhost:50090](http://dockerhost:50090) |
 
-#Running MapReduce example
+##Running MapReduce example
 
 The General workflow for MapRecuce is:'Input—>Map—>Reduce->Output'.
 
@@ -104,31 +104,23 @@ Below are steps to implement the workflow.
 
 Ammend the following configuration to mapred-site.xml:
 
-'<configuration>
-<!--<property>
- <name>mapreduce.framework.name</name>
- <value>yarn</value>
-</property>-->
- <property>
-         <name>mapred.job.tracker</name>
-         <value>hdfs-namenode:9001</value>
-</property>
+Set the property mapred.job.tracker to hdfs-namenode:9001.
+Remove the property mapreduce.framework.name
 
-</configuration>'
 
 ###2) Input Data
 
-####2.1) create directory for input file
+###2.1) create directory for input file
 
 hadoop fs -mkdir /usr
 hadoop fs -mkdir /usr/WordCount
 hadoop fs -mkdir /usr/WordCount/Input
 
-####2.2) create directory for temp file, that will hold the input file to be prepared
+###2.2) create directory for temp file, that will hold the input file to be prepared
 mkdir ~/hdp-ex/
 cd ~/hdp-ex/
 
-####2.3) prepare input files
+###2.3) prepare input files
 
 Small file example:
 touch in.txt
@@ -139,7 +131,7 @@ In this example i am adding the following words:
 
 hello world hello docker hello hadoop hello mapreduce h
 
-####2.4)  copy file to HDFS for processing by map reduce
+###2.4)  copy file to HDFS for processing by map reduce
 hadoop fs -copyFromLocal ~/hdp-ex/in.txt hdfs://hdfs-namenode:9000/usr/WordCount/Input
 
 
