@@ -93,5 +93,64 @@ Each component provide its own web UI. Open you browser at one of the URLs below
 | HDFS NameNode           | [http://dockerhost:50070](http://dockerhost:50070) |
 | HDFS DataNode           | [http://dockerhost:50075](http://dockerhost:50075) |
 | HDFS Secondary NameNode | [http://dockerhost:50090](http://dockerhost:50090) |
+##Running MapReduce example
 
+The General workflow for MapRecuce is:'Input—>Map—>Reduce->Output'.
+
+Below are steps to implement the workflow.
+
+###1) Configuration
+
+Ammend the following configuration to mapred-site.xml: 
+
+Set the property mapred.job.tracker to hdfs-namenode:9001.  
+Remove the property mapreduce.framework.name  
+
+
+###2) Input Data
+
+###2.1) create directory for the input file in HDFS
+
+hadoop fs -mkdir /usr  
+hadoop fs -mkdir /usr/WordCount  
+hadoop fs -mkdir /usr/WordCount/Input  
+
+###2.2) Prepare the input file
+
+mkdir ~/hdp-ex/  
+cd ~/hdp-ex/  
+ 
+touch in.txt  
+
+In this example we are using the following words:  
+
+hello world hello docker hello hadoop hello mapreduce h  
+
+###2.3)  copy the input file to HDFS for processing by map reduce
+
+hadoop fs -copyFromLocal ~/hdp-ex/in.txt hdfs://hdfs-namenode:9000/usr/WordCount/Input
+
+###3) run the mapreduce, word count
+
+hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar wordcount /usr/WordCount/Input/in.txt /usr/WordCount/Output/
+
+###4) output: check the output
+
+hadoop fs -ls /usr/WordCount/Output/  
+
+Found 2 items  
+-rw-r--r--   2 root supergroup          0 2015-09-27 21:00 /usr/WordCount/Output/_SUCCESS  
+-rw-r--r--   2 root supergroup         50 2015-09-27 21:00 /usr/WordCount/Output/part-r-00000    
+
+Read the output file:
+
+hadoop fs  -cat /usr/WordCount/Output/part-r-00000  
+
+------------  
+docker	1  
+h	1  
+hadoop	1  
+hello	4  
+mapreduce	1  
+world	1 
 
