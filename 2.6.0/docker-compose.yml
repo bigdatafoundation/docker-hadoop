@@ -9,6 +9,7 @@ datanode:
     image: gelog/hadoop
     command: hdfs datanode
     ports:
+# The host port is randomly assigned by Docker, to allow scaling to multiple DataNodes on the same host
         - "50075"
     links:
         - namenode:hdfs-namenode
