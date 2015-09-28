@@ -70,6 +70,7 @@ ADD hdfs-site.xml $HADOOP_CONF_DIR/hdfs-site.xml
 #	50475 = dfs.datanode.https.address	(HTTPS / Secure UI)
 # HDFS: Secondary NameNode (SNN)
 #	50090 = dfs.secondary.http.address	(HTTP / Checkpoint for NameNode metadata)
-EXPOSE 9000 50070 50010 50020 50075 50090
+#       50030                                   (HTTP for Job Tracker web UI)
+EXPOSE 9000 50070 50010 50020 50075 50090 50030 9001
 
 CMD ["hdfs"]
