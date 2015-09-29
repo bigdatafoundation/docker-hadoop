@@ -110,10 +110,9 @@ Remove the property mapreduce.framework.name
 ###2) Input Data
 
 ###2.1) create directory for the input file in HDFS
-
-hadoop fs -mkdir /usr  
-hadoop fs -mkdir /usr/WordCount  
-hadoop fs -mkdir /usr/WordCount/Input  
+ 
+hadoop fs -mkdir /WordCount  
+hadoop fs -mkdir /WordCount/Input  
 
 ###2.2) Prepare the input file
 
@@ -128,15 +127,15 @@ hello world hello docker hello hadoop hello mapreduce h
 
 ###2.3)  copy the input file to HDFS for processing by map reduce
 
-hadoop fs -copyFromLocal ~/hdp-ex/in.txt hdfs://hdfs-namenode:9000/usr/WordCount/Input
+hadoop fs -copyFromLocal ~/hdp-ex/in.txt hdfs://hdfs-namenode:9000/WordCount/Input
 
 ###3) run the mapreduce, word count
 
-hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar wordcount /usr/WordCount/Input/in.txt /usr/WordCount/Output/
+hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar wordcount /WordCount/Input/in.txt /WordCount/Output/
 
 ###4) output: check the output
 
-hadoop fs -ls /usr/WordCount/Output/  
+hadoop fs -ls /WordCount/Output/  
 
 Found 2 items  
 -rw-r--r--   2 root supergroup          0 2015-09-27 21:00 /usr/WordCount/Output/_SUCCESS  
@@ -144,7 +143,7 @@ Found 2 items
 
 Read the output file:
 
-hadoop fs  -cat /usr/WordCount/Output/part-r-00000  
+hadoop fs  -cat /WordCount/Output/part-r-00000  
 
 ------------  
 docker	1  
