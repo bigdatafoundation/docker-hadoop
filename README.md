@@ -138,8 +138,8 @@ hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.
 hadoop fs -ls /WordCount/Output/  
 
 Found 2 items  
--rw-r--r--   2 root supergroup          0 2015-09-27 21:00 /usr/WordCount/Output/_SUCCESS  
--rw-r--r--   2 root supergroup         50 2015-09-27 21:00 /usr/WordCount/Output/part-r-00000    
+-rw-r--r--   2 root supergroup          0 2015-09-27 21:00 /WordCount/Output/_SUCCESS  
+-rw-r--r--   2 root supergroup         50 2015-09-27 21:00 /WordCount/Output/part-r-00000    
 
 Read the output file:
 
