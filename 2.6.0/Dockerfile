@@ -1,11 +1,10 @@
 FROM ubuntu:14.04
 
-MAINTAINER Francois Langelier
-
 # Setting HADOOP environment variables
 ENV HADOOP_VERSION 2.6.0
 ENV HADOOP_HOME /usr/local/hadoop
 ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+ENV JAVA_VERSION 7u79
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 
 # Fixes issue #8: Configure Hadoop native library
@@ -14,7 +13,7 @@ ENV HADOOP_OPTS -Djava.library.path=/usr/local/hadoop/lib/native
 
 # Installing HADOOP
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-7-jdk=7u79\* wget libzip2 libsnappy1 libssl-dev && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-7-jdk=$JAVA_VERSION\* wget libzip2 libsnappy1 libssl-dev && \
     wget http://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
     tar -zxf /hadoop-$HADOOP_VERSION.tar.gz && \
     rm /hadoop-$HADOOP_VERSION.tar.gz && \
