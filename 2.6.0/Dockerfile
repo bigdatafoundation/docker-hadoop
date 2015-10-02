@@ -40,11 +40,14 @@ RUN \
     DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-7-jdk=$JAVA_VERSION && \
     rm -rf /var/lib/apt/lists/*
 
-# Creating symlink for HADOOP configuration files
-VOLUME /data
 
 # Copying default HADOOP configuration files
 COPY conf  $HADOOP_CONF_DIR/
+
+# Creating symlink for HADOOP configuration files
+RUN mkdir /data && \
+hdfs namenode -format
+VOLUME /data
 
 
 ####################
@@ -70,5 +73,7 @@ COPY conf  $HADOOP_CONF_DIR/
 # HDFS: Secondary NameNode (SNN)
 #	50090 = dfs.secondary.http.address	(HTTP / Checkpoint for NameNode metadata)
 EXPOSE 9000 50070 50010 50020 50075 50090
+
+
 
 CMD ["hdfs"]
