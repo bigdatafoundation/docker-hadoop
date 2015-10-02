@@ -39,11 +39,13 @@ COPY conf  $HADOOP_HOME/etc/hadoop/
 
 # Formatting HDFS
 RUN mkdir /data && \
-hdfs namenode -format
+    hdfs namenode -format
 VOLUME /data
 
-#Helper script for starting YARN
+
+# Helper script for starting YARN
 ADD start-yarn.sh /usr/local/bin/start-yarn.sh
+
 
 
 ####################
