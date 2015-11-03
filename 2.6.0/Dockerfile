@@ -5,11 +5,10 @@ FROM ubuntu:14.04
 # JAVA
 ####################
 
-ENV JAVA_VERSION	7 # don't use more prefix since it's unmaintanable if Ubuntu repository is not mirrored.
 ENV JAVA_HOME		/usr/lib/jvm/java-7-openjdk-amd64
 
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-7-jdk=$JAVA_VERSION\* && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-7-jdk && \
     rm -rf /var/lib/apt/lists/*
 
 
