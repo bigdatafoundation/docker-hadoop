@@ -40,6 +40,7 @@ COPY conf  $HADOOP_HOME/etc/hadoop/
 RUN mkdir /data && \
     hdfs namenode -format
 VOLUME /data
+RUN mkdir  -p /data/dfs/data /data/dfs/name /data/dfs/namesecondary
 
 
 # Helper script for starting YARN
