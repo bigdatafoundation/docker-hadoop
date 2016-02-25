@@ -37,7 +37,7 @@ RUN apt-get update && \
 COPY conf  $HADOOP_HOME/etc/hadoop/
 
 # Formatting HDFS
-RUN mkdir /data && \
+RUN mkdir -p /data/dfs/data /data/dfs/name /data/dfs/namesecondary && \
     hdfs namenode -format
 VOLUME /data
 
